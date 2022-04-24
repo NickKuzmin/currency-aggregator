@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyAggregator", "CurrencyAggregator\CurrencyAggregator.csproj", "{D47D933B-9726-4096-A6CA-5A358429C84D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyAggregator.Domain", "CurrencyAggregator.Domain\CurrencyAggregator.Domain.csproj", "{FA17D89E-197D-4270-887E-27E0951E879B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D47D933B-9726-4096-A6CA-5A358429C84D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D47D933B-9726-4096-A6CA-5A358429C84D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D47D933B-9726-4096-A6CA-5A358429C84D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D47D933B-9726-4096-A6CA-5A358429C84D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA17D89E-197D-4270-887E-27E0951E879B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA17D89E-197D-4270-887E-27E0951E879B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA17D89E-197D-4270-887E-27E0951E879B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA17D89E-197D-4270-887E-27E0951E879B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C895D526-5CC8-4629-84F8-DDA1C76E6140}
+	EndGlobalSection
+EndGlobal

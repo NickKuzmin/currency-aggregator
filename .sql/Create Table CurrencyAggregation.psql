@@ -1,0 +1,8 @@
+CREATE SCHEMA IF NOT EXISTS dbo;
+
+CREATE TABLE dbo.currencyaggregation (
+	id serial PRIMARY KEY,
+	typecode text NOT NULL,
+	value real NULL,
+	date date NOT NULL
+);
