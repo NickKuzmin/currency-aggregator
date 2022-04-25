@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CurrencyAggregator.Domain.Services.Implementation;
 using CurrencyAggregator.Domain.Services.Interfaces;
+using CurrencyAggregator.Domain.Settings;
 using CurrencyAggregator.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,16 @@ namespace CurrencyAggregator
             services.AddScoped<ICurrencyAggregationHttpClient, CurrencyAggregationHttpClient>();
             services.AddScoped<ICurrencyAggregationDataProvider, CurrencyAggregationDataProvider>();
             services.AddHostedService<CurrencyAggregationBackgroundWorker>();
+
+            AddConfigurationSettings(services);
+        }
+
+        public void AddConfigurationSettings(IServiceCollection services)
+        {
+            var currConvHttpSettings = Configuration.GetSection("CurrConvHttpSettings")
+                .Get<CurrConvHttpSettings>();
+
+            services.AddSingleton(provider => currConvHttpSettings);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

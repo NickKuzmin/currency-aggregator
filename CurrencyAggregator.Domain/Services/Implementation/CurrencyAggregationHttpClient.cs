@@ -1,19 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using CurrencyAggregator.Domain.Constants;
 using CurrencyAggregator.Domain.Services.Interfaces;
+using CurrencyAggregator.Domain.Settings;
 
 namespace CurrencyAggregator.Domain.Services.Implementation
 {
     public class CurrencyAggregationHttpClient : ICurrencyAggregationHttpClient
     {
         private readonly IHttpClientFactory _clientFactory;
+        private readonly CurrConvHttpSettings _currConvHttpSettings;
 
-        public CurrencyAggregationHttpClient(IHttpClientFactory clientFactory)
+        public CurrencyAggregationHttpClient(IHttpClientFactory clientFactory, CurrConvHttpSettings currConvHttpSettings)
         {
-            _clientFactory = clientFactory;
+            _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
+            _currConvHttpSettings = currConvHttpSettings ?? throw new ArgumentNullException(nameof(currConvHttpSettings));
         }
 
         public async Task<double?> GetCurrencyPairValueAsync(string currencyPairType)
@@ -22,8 +26,10 @@ namespace CurrencyAggregator.Domain.Services.Implementation
                 ? CurrConvCurrencyPairTypes.USDRUB
                 : CurrConvCurrencyPairTypes.EURRUB;
 
-            var request = new HttpRequestMessage(HttpMethod.Get,
-                $"https://free.currconv.com/api/v7/convert?q={currConvCurrencyPairTypes}&compact=ultra&apiKey=SECRET")
+            var url = _currConvHttpSettings.Url
+                .Replace("{currConvCurrencyPairTypes}", currConvCurrencyPairTypes);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, url)
             {
                 Headers =
                 {
