@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CurrencyAggregator.Domain\CurrencyAggregator.Domain.csproj" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\CurrencyAggregator.Domain\CurrencyAggregator.Domain.csproj" />
   </ItemGroup>
 
 </Project>

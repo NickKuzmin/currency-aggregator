@@ -22,9 +22,7 @@ namespace CurrencyAggregator.Domain.Services.Implementation
 
         public async Task<double?> GetCurrencyPairValueAsync(string currencyPairType)
         {
-            var currConvCurrencyPairTypes = currencyPairType == CurrencyPairTypes.USDRUB
-                ? CurrConvCurrencyPairTypes.USDRUB
-                : CurrConvCurrencyPairTypes.EURRUB;
+            var currConvCurrencyPairTypes = ResolveCurrencyPairType(currencyPairType);
 
             var url = _currConvHttpSettings.Url
                 .Replace("{currConvCurrencyPairTypes}", currConvCurrencyPairTypes);
@@ -42,7 +40,7 @@ namespace CurrencyAggregator.Domain.Services.Implementation
             var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                using var responseStream = await response.Content.ReadAsStreamAsync();
+                await using var responseStream = await response.Content.ReadAsStreamAsync();
                 var result = await JsonSerializer.DeserializeAsync<Dictionary<string, double>>(responseStream);
 
                 if (result != null && result.TryGetValue(currConvCurrencyPairTypes, out var currencyPairValue))
@@ -52,6 +50,19 @@ namespace CurrencyAggregator.Domain.Services.Implementation
             }
 
             return null;
+        }
+
+        private string ResolveCurrencyPairType(string currencyPairType)
+        {
+            switch (currencyPairType)
+            {
+                case CurrencyPairTypes.USDRUB:
+                    return CurrConvCurrencyPairTypes.USDRUB;
+                case CurrencyPairTypes.EURRUB:
+                    return CurrConvCurrencyPairTypes.EURRUB;
+                default:
+                    throw new ArgumentException();
+            }
         }
     }
 }

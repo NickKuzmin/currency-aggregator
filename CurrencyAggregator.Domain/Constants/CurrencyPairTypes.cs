@@ -2,8 +2,8 @@
 {
     public static class CurrencyPairTypes
     {
-        public static string USDRUB = "USDRUB";
+        public const string USDRUB = "USDRUB";
 
-        public static string EURRUB = "EURRUB";
+        public const string EURRUB = "EURRUB";
     }
 }
